@@ -1,0 +1,28 @@
+---
+## DOCKER
+# docker_version: 19.03.2
+docker_version: 18.09.9
+docker_lvm_storage: false
+docker_lvm_device: /dev/sdb
+docker_lvm_device_number: 1
+insecure_registry:
+  - 127.0.0.1/8
+
+## PROXY Settings
+proxy_enabled: false
+proxy_server: 192.168.0.20
+proxy_port: 8080
+proxy_url: http://{{ proxy_server }}:{{ proxy_port }}
+
+## CUSTOM CONFIG
+daemon_json_content: |
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "storage-driver": "overlay2",
+  "storage-opts": [
+      "overlay2.override_kernel_check=true"
+  ],
+  "ipv6": false,
+  "log-opts": {
+     "max-size": "50m"
+  },
+  "insecure-registries" : [ {% for reg in insecure_registry %}"{{ reg }}"{% if not loop.last %},{% endif %}{% endfor %} ]

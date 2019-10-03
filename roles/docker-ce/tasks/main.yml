@@ -1,0 +1,48 @@
+---
+- name: docker | Install prereq packages
+  yum:
+    name:
+      - yum-utils
+      - device-mapper-persistent-data
+      - lvm2
+    state: present
+
+
+- name: docker | installing repository
+  shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  args:
+    creates: /etc/yum.repos.d/docker-ce.repo
+
+    
+- name: docker | install docker-ce
+  yum: 
+    name: 
+      - docker-ce-{{ docker_version }}
+      - docker-ce-cli-{{ docker_version }}
+      - containerd.io
+    state: present
+
+
+- name: docker | LVM configuration 
+  include: lvm.yml
+  when: docker_lvm_storage
+
+
+- name: docker | proxy configuration
+  include: proxy.yml
+  when: proxy_enabled 
+
+
+- name: docker | setup custom config
+  include: custom_config.yml
+
+
+- name: docker | Start Service
+  systemd: name=docker state=started enabled=yes
+
+
+- name: docker | Install docker-compose
+  include: docker-compose.yml
+  tags:
+    - docker
+    - docker-compose

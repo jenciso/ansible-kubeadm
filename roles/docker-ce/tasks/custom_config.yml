@@ -1,0 +1,10 @@
+---
+- name: docker | Create directory /etc/docker
+  file: path=/etc/docker state=directory
+
+
+- name: docker | Setup configuration in daemon.json
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+  notify: restart docker
