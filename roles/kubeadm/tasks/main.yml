@@ -1,0 +1,58 @@
+---
+- name: kubeadm | copy repo
+  copy: src=kubernetes.repo dest=/etc/yum.repos.d/
+
+
+- name: kubeadm | disable selinux
+  shell: setenforce 0
+  changed_when: false
+
+
+- name: kubeadm | disable selinux permanently
+  lineinfile:
+    path: /etc/selinux/config
+    regexp: ^SELINUX=
+    line: SELINUX=permissive
+
+
+- name: kubeadm | Disable SWAP - now
+  shell: swapoff -a
+  changed_when: false
+    
+
+- name: kubeadm | Disable SWAP - in fstab
+  lineinfile:
+    path: /etc/fstab
+    regexp: '^/dev/mapper/centos-swap.*'
+    state: absent
+
+
+- name: kubeadm | install kubeadm components
+  yum:
+    name:
+      - "kubelet-{{ kubernetes_version }}"
+      - "kubeadm-{{ kubernetes_version }}"
+      - "kubectl-{{ kubernetes_version }}"
+    disable_excludes: kubernetes
+    state: present
+
+- name: kubeadm | enable kubelet
+  systemd:
+    name: kubelet
+    state: started
+    enabled: yes
+    
+
+- name: kubeadm | sysctl conf
+  copy: src=k8s.conf dest=/etc/sysctl.d/
+  register: k8s_sysctl
+
+
+- name: kubeadm | sysctl apply
+  shell: sysctl --system
+  when: k8s_sysctl.changed
+
+
+- name: kubeadm | pull images
+  shell: "kubeadm config images pull --kubernetes-version v{{ kubernetes_version }}"
+  when: "'master' in group_names"

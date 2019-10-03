@@ -1,0 +1,5 @@
+[master]
+kube-master.10.0.5.31.xip.io
+
+[nodes]
+kube-node01.10.0.5.32.xip.io

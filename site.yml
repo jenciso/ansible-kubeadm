@@ -1,0 +1,17 @@
+---
+- name: kubernetes | kubeadm
+  hosts: all
+  remote_user: ansible
+  roles:
+    - prereq
+    - docker-ce
+  tags:
+    - kubeadm-prereq
+
+- name: kubernetes | kubeadm
+  hosts: all
+  remote_user: ansible
+  roles:
+    - kubeadm
+  tags:
+    - kubeadm

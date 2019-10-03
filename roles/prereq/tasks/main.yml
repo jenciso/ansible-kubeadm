@@ -1,0 +1,5 @@
+---
+- name: prereq | remove firewalld
+  yum: name=firewalld state=absent
+
+
