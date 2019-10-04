@@ -3,3 +3,4 @@ kube-master.10.0.5.31.xip.io
 
 [nodes]
 kube-node01.10.0.5.32.xip.io
+kube-node02.10.0.5.33.xio.io  ansible_host=127.0.0.1  ansible_port=2233

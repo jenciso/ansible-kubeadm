@@ -4,26 +4,20 @@
 
 
 - name: kubeadm | disable selinux
-  shell: setenforce 0
-  changed_when: false
+  selinux:
+    policy: targeted
+    state: permissive
 
 
-- name: kubeadm | disable selinux permanently
-  lineinfile:
-    path: /etc/selinux/config
-    regexp: ^SELINUX=
-    line: SELINUX=permissive
-
-
-- name: kubeadm | Disable SWAP - now
+- name: kubeadm | Disable swap
   shell: swapoff -a
-  changed_when: false
+  when: ansible_swaptotal_mb > 0
     
 
-- name: kubeadm | Disable SWAP - in fstab
-  lineinfile:
-    path: /etc/fstab
-    regexp: '^/dev/mapper/centos-swap.*'
+- name: kubeadm | Remove swapfile from /etc/fstab
+  mount:
+    name: swap
+    fstype: swap
     state: absent
 
 
