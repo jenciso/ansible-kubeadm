@@ -1,6 +1,7 @@
 [master]
-kube-master.10.0.5.31.xip.io
+kube-master.10.0.2.10.nip.io  ansible_host=192.168.56.10
 
 [nodes]
-kube-node01.10.0.5.32.xip.io
-kube-node02.10.0.5.33.xio.io  ansible_host=127.0.0.1  ansible_port=2233
+kube-node01.10.0.2.11.nip.io  ansible_host=192.168.56.11
+kube-node02.10.0.2.12.nip.io  ansible_host=192.168.56.12
+kube-node03.10.0.2.13.nip.io  ansible_host=192.168.56.13
