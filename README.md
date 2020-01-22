@@ -1,7 +1,14 @@
 ## Ansible Playbook to provision kubeadm
 
-Install kubeadm in master and nodes 
+Provision VM's
 
+```
+./new-vm.sh -n k8s-master -m 2048 -c 2 -i 192.168.122.100
+./new-vm.sh -n k8s-node01 -m 2048 -c 2 -i 192.168.122.101
+./new-vm.sh -n k8s-node02 -m 2048 -c 2 -i 192.168.122.102
+```
+
+Install 
 ```
 ansible-playbook site.yml -i inventory
 ```

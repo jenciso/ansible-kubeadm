@@ -1,7 +1,6 @@
 [master]
-kube-master.10.0.2.10.nip.io  ansible_host=192.168.56.10
+k8s-master.enciso.website
 
 [nodes]
-kube-node01.10.0.2.11.nip.io  ansible_host=192.168.56.11
-kube-node02.10.0.2.12.nip.io  ansible_host=192.168.56.12
-kube-node03.10.0.2.13.nip.io  ansible_host=192.168.56.13
+k8s-node01.enciso.website
+k8s-node02.enciso.website

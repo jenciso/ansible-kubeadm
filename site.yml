@@ -1,7 +1,7 @@
 ---
 - name: kubernetes | kubeadm
   hosts: all
-  remote_user: root
+  remote_user: centos
   roles:
     - prereq
     - docker-ce
@@ -11,7 +11,7 @@
 
 - name: kubernetes | kubeadm
   hosts: all
-  remote_user: root
+  remote_user: centos
   roles:
     - kubeadm
   tags:
