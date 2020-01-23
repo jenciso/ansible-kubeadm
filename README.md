@@ -41,3 +41,11 @@ kubectl get nodes
 kubectl get pods --all-namespaces
 kubectl get pods --all-namespaces -o wide
 ```
+
+## NOTES
+
+To get other token to join one node in the cluster
+```
+kubeadm token create --print-join-command
+```
+
