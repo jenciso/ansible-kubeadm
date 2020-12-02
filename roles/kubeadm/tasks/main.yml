@@ -49,4 +49,6 @@
 
 - name: kubeadm | pull images
   shell: "kubeadm config images pull --kubernetes-version v{{ kubernetes_version }}"
-  when: "'master' in group_names"
+  when:
+    - "'master' in group_names"
+    - kubernetes_pull_images| bool

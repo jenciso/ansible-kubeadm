@@ -48,4 +48,3 @@ To get other token to join one node in the cluster
 ```
 kubeadm token create --print-join-command
 ```
-

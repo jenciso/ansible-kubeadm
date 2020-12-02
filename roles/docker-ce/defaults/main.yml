@@ -1,7 +1,7 @@
 ---
 ## DOCKER
-# docker_version: 19.03.2
-docker_version: 18.09.9
+docker_version: 19.03.13
+#docker_version: 18.09.9
 docker_lvm_storage: false
 docker_lvm_device: /dev/sdb
 docker_lvm_device_number: 1
