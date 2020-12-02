@@ -5,6 +5,7 @@ docker_version: 19.03.13
 docker_lvm_storage: false
 docker_lvm_device: /dev/sdb
 docker_lvm_device_number: 1
+docker_compose_install: false
 insecure_registry:
   - 127.0.0.1/8
 

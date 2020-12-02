@@ -46,3 +46,4 @@
   tags:
     - docker
     - docker-compose
+  when: docker_compose_install | bool
