@@ -13,33 +13,35 @@
   args:
     creates: /etc/yum.repos.d/docker-ce.repo
 
-    
+
 - name: docker | install docker-ce
-  yum: 
-    name: 
+  yum:
+    name:
       - docker-ce-{{ docker_version }}
       - docker-ce-cli-{{ docker_version }}
       - containerd.io
     state: present
 
 
-- name: docker | LVM configuration 
+- name: docker | LVM configuration
   include: lvm.yml
   when: docker_lvm_storage
 
 
 - name: docker | proxy configuration
   include: proxy.yml
-  when: proxy_enabled 
+  when: proxy_enabled
 
 
 - name: docker | setup custom config
   include: custom_config.yml
-
+  tags:
+    - docker-config
 
 - name: docker | Start Service
   systemd: name=docker state=started enabled=yes
-
+  tags:
+    - docker-config
 
 - name: docker | Install docker-compose
   include: docker-compose.yml
