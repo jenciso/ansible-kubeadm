@@ -1,6 +1,6 @@
 [master]
-k8s-master.docs-planet.site
+kube-m01.unicred.cloud
 
 [nodes]
-k8s-node01.docs-planet.site
-k8s-node02.docs-planet.site
+kube-w01.unicred.cloud
+kube-w02.unicred.cloud
